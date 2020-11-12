@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RBAC</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= nav_bar fixed: :top, brand: "RBAC - Role Base Access Control", class: "navbar-form navbar-right", responsive: true do %>
+      <%= menu_group do %>       
+
+        <% if user_signed_in? %>
+          <%= menu_item "Home", root_path %>
+          <%= menu_divider %>            
+          <%= menu_item "Posts", posts_path %> 
+          <%= menu_divider %>
+          <%= menu_item "Roles", roles_path %>
+          <%= menu_item "Permissions", permissions_path %>   
+        <% end %>
+
+      <% end %>
+      <%= menu_group pull: :right do %> 
+        <%= menu_item "Logout", destroy_user_session_path, method: :delete %>        
+      <% end %> 
+    <% end %>   
+    <div class='container'>
+      <%= yield %>
+    </div>
+  </body>
+</html>

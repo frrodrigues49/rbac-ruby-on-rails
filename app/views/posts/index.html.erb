@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Posts</h1>
+
+<div class="table-responsive">
+  <table class="table table-bordered text-center">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th colspan="3">Ações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @posts.each do |post| %>
+        <tr>
+          <td><%= post.name %></td>
+          <td><%= post.description %></td>
+          <td><%= link_to 'Visualizar', post, :class => 'btn btn-default' %></td>
+          <td><%= link_to 'Editar', edit_post_path(post), :class => 'btn btn-primary' %></td>
+          <td><%= link_to 'Deletar', post, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<% if policy(@posts).new? %>
+  <%= link_to 'Novo', new_post_path, :class => "btn btn-primary" %>
+<% end %>
